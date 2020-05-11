@@ -1,0 +1,235 @@
+syntax = "proto3";
+
+package pb;
+import "util.proto";
+service AgentManager{
+rpc StartDNS(DNSStartReq) returns (OperResult){}
+rpc StopDNS(DNSStopReq) returns (OperResult){}
+rpc CreateACL(CreateACLReq) returns (OperResult){}
+rpc UpdateACL(UpdateACLReq) returns (OperResult){}
+rpc DeleteACL(DeleteACLReq) returns (OperResult){}
+rpc CreateView(CreateViewReq) returns (OperResult){}
+rpc UpdateView(UpdateViewReq) returns (OperResult){}
+rpc DeleteView(DeleteViewReq) returns (OperResult){}
+rpc CreateZone(CreateZoneReq) returns (OperResult){}
+rpc DeleteZone(DeleteZoneReq) returns (OperResult){}
+rpc CreateRR(CreateRRReq) returns (OperResult){}
+rpc UpdateRR(UpdateRRReq) returns (OperResult){}
+rpc DeleteRR(DeleteRRReq) returns (OperResult){} 
+rpc UpdateDefaultForward(UpdateDefaultForwardReq) returns (OperResult){}
+rpc DeleteDefaultForward(DeleteDefaultForwardReq) returns (OperResult){} 
+rpc UpdateForward(UpdateForwardReq) returns (OperResult){}
+rpc DeleteForward(DeleteForwardReq) returns (OperResult){} 
+rpc CreateRedirection(CreateRedirectionReq) returns (OperResult){}
+rpc UpdateRedirection(UpdateRedirectionReq) returns (OperResult){}
+rpc DeleteRedirection(DeleteRedirectionReq) returns (OperResult){}
+rpc CreateDefaultDNS64(CreateDefaultDNS64Req) returns (OperResult){}
+rpc UpdateDefaultDNS64(UpdateDefaultDNS64Req) returns (OperResult){}
+rpc DeleteDefaultDNS64(DeleteDefaultDNS64Req) returns (OperResult){}
+rpc CreateDNS64(CreateDNS64Req) returns (OperResult){}
+rpc UpdateDNS64(UpdateDNS64Req) returns (OperResult){}
+rpc DeleteDNS64(DeleteDNS64Req) returns (OperResult){}
+rpc CreateIPBlackHole(CreateIPBlackHoleReq) returns (OperResult){}
+rpc UpdateIPBlackHole(UpdateIPBlackHoleReq) returns (OperResult){}
+rpc DeleteIPBlackHole(DeleteIPBlackHoleReq) returns (OperResult){}
+rpc UpdateRecursiveConcurrent(UpdateRecurConcuReq) returns (OperResult){}
+rpc CreateSortList(CreateSortListReq) returns (OperResult){}
+rpc UpdateSortList(UpdateSortListReq) returns (OperResult){}
+rpc DeleteSortList(DeleteSortListReq) returns (OperResult){}
+}
+
+message DNSStartReq{
+	string config = 1;
+}
+
+message DNSStopReq{
+}
+
+message CreateACLReq{
+string name = 1;
+string iD = 2;
+repeated string iPs = 3;
+}
+
+message UpdateACLReq{
+string iD = 1;
+string name = 2;
+repeated string newIPs = 3;
+}
+
+message DeleteACLReq{
+string iD = 1;
+}
+
+message CreateViewReq{
+string viewName = 1;
+string viewID = 2;
+int32 priority = 3;
+repeated string aCLIDs = 4;
+}
+
+message UpdateViewReq{
+string viewID = 1;
+int32 priority = 2;
+repeated string deleteACLIDs = 3;
+repeated string addACLIDs = 4;
+}
+
+message DeleteViewReq{
+string viewID = 1;
+}
+
+message CreateZoneReq{
+string viewID = 1;
+string zoneID = 2;
+string zoneName = 3;
+string zoneFileName = 4;
+}
+
+message DeleteZoneReq{
+string viewID = 1;
+string zoneID = 2;
+}
+
+message CreateRRReq{
+string viewID = 1;
+string zoneID = 2;
+string rRID = 3;
+string name = 4;
+string type = 5;
+string value = 6;
+string tTL = 7;
+}
+
+message UpdateRRReq{
+string viewID = 1;
+string zoneID = 2;
+string rRID = 3;
+string name = 4;
+string type = 5;
+string value = 6;
+string tTL = 7;
+}
+
+message DeleteRRReq{
+string viewID = 1;
+string zoneID = 2;
+string rRID = 3;
+}
+
+message UpdateDefaultForwardReq{
+string type = 1;
+repeated string iPs = 2;
+}
+
+message DeleteDefaultForwardReq{
+}
+
+message UpdateForwardReq{
+string viewID = 1;
+string zoneID = 2;
+string type = 3;
+repeated string iPs = 4;
+}
+
+message DeleteForwardReq{
+string viewID = 1;
+string zoneID = 2;
+}
+
+message CreateRedirectionReq{
+string ID = 1;
+string viewID = 2;
+string Name = 3;
+string TTL = 4;
+string DataType = 5;
+string Value = 6;
+string RedirectType = 7;
+}
+
+message UpdateRedirectionReq{
+string ID = 1;
+string viewID = 2;
+string Name = 3;
+string TTL = 4;
+string DataType = 5;
+string Value = 6;
+string RedirectType = 7;
+}
+
+message DeleteRedirectionReq{
+string viewID = 1;
+string ID = 2;
+string RedirectType = 3;
+}
+
+message CreateDefaultDNS64Req{
+string ID = 1;
+string Prefix = 2;
+string ClientACL= 3;
+string AAddress = 4;
+}
+
+message UpdateDefaultDNS64Req{
+string ID = 1;
+string Prefix = 2;
+string ClientACL = 3;
+string AAddress = 4;
+}
+
+message DeleteDefaultDNS64Req{
+string ID = 1;
+}
+
+message CreateDNS64Req{
+string ID = 1;
+string ViewID = 2;
+string Prefix = 3;
+string ClientACL = 4;
+string AAddress = 5;
+}
+
+message UpdateDNS64Req{
+string ID = 1;
+string ViewID = 2;
+string Prefix = 3;
+string ClientACL = 4;
+string AAddress = 5;
+}
+
+message DeleteDNS64Req{
+string ID = 1;
+string ViewID = 2;
+}
+
+message CreateIPBlackHoleReq{
+string ID = 1;
+string ACLID = 2;
+}
+
+message UpdateIPBlackHoleReq{
+string ID = 1;
+string ACLID = 2;
+}
+
+message DeleteIPBlackHoleReq{
+string ID = 1;
+}
+
+message UpdateRecurConcuReq{
+string RecursiveClients = 1;
+string FetchesPerZone = 2;
+}
+
+message CreateSortListReq{
+repeated string ACLIDs = 1;
+}
+
+message UpdateSortListReq{
+repeated string ACLIDs = 1;
+}
+
+message DeleteSortListReq{
+repeated string ACLIDs = 1;
+}
+
