@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package pb;
-
-message OperResult {
-    int32 ret_code = 1; //operation result:0 stands for success, 1 stands for fail.
-    string ret_msg = 2; 
-}
